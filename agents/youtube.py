@@ -12,7 +12,7 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Gemini Client
-client = genai.Client(api_key="YOUR_API_KEY")
+client = genai.Client(api_key="AIzaSyB8Iv8S6GoRziCa_ZyW-UZ83iA0YbDWzmU")
 
 
 # -----------------------------
