@@ -1,0 +1,8 @@
+flask>=3.0.0
+google-genai>=1.0.0
+openai-whisper>=20231117
+opencv-python>=4.9.0.80
+numpy>=1.26.0
+torch>=2.2.0
+torchvision>=0.17.0
+torchaudio>=2.2.0
