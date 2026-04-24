@@ -8,7 +8,7 @@ from google import genai
 # CONFIG
 # -----------------------------
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs_youtube")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Gemini Client
@@ -246,7 +246,7 @@ def process_youtube(video_path):
 # RUN
 # -----------------------------
 if __name__ == "__main__":
-    test_video = r"C:\Users\Hemanth\Desktop\ksit\sentinel6.0\uploads\test.mp4"
+    test_video = r"C\:\Users\Hemanth\Desktop\ksit\sentinel6.0\uploads\test.mp4"
 
     result = process_youtube(test_video)
 

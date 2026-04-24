@@ -87,10 +87,15 @@ class InstagramAgent:
 
     # 🎬 3. PROCESS VIDEO
     def process(self, input_path):
-        os.makedirs("outputs", exist_ok=True)
+        # 📁 Get project root (outside agents folder)
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        # 📂 Create outputs_instagram in root
+        output_dir = os.path.join(base_dir, "outputs_instagram")
+        os.makedirs(output_dir, exist_ok=True)
 
         filename = os.path.basename(input_path)
-        output_path = os.path.join("outputs", f"insta_{filename}")
+        output_path = os.path.join(output_dir, f"insta_{filename}")
 
         # 🔥 AI trim
         start_time = self.detect_best_segment(input_path)
@@ -111,10 +116,9 @@ class InstagramAgent:
 
         return output_path
 
-
 # 🧪 TEST
 if __name__ == "__main__":
-    input_video = "test.mp4"
+    input_video = "C:\\Users\\someo\\Desktop\\ksit\\sentinel6.0\\uploads\\test.mp4"
 
     if not os.path.exists(input_video):
         print("❌ File not found:", input_video)
