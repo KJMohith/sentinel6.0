@@ -53,7 +53,7 @@ class InstagramAgent:
     def generate_hook(self):
         try:
             client = genai.Client(
-                api_key="AIzaSyCPUX9qrPnojQylc9VsZRx94J5TjHzt828"
+                api_key="AIzaSyCZH9_sArhEuI3O8LT0WR2ripBMP1GU2vY"
             )
 
             prompt = """

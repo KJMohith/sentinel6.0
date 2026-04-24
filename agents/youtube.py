@@ -12,12 +12,9 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "outputs_youtube")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Gemini Client
-client = genai.Client(api_key="AIzaSyB8Iv8S6GoRziCa_ZyW-UZ83iA0YbDWzmU")
+client = genai.Client(api_key="AIzaSyCuqBd-nsTCTGoZdWkO9E_ZWEInWze15PI")
 
 
-# -----------------------------
-# RETRY FUNCTION
-# -----------------------------
 def gemini_request_with_retry(prompt, retries=3, delay=3):
     for attempt in range(retries):
         try:

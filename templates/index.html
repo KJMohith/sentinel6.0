@@ -1,141 +1,254 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Adaptation System</title>
-
-<link rel="stylesheet" href="../static/style.css">
-
+<title>Sentinel 6.0 — AI Video Adapter</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
 
-<div class="bg-glow glow1"></div>
-<div class="bg-glow glow2"></div>
-
-<header class="navbar">
-
-<div class="logo">
-🎬 Video Adaptation <span>System</span>
+<div class="ambient">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
 </div>
 
-<nav>
-<a href="#">Home</a>
-<a href="#">Features</a>
-<a href="#">How It Works</a>
-<a href="#">About</a>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="brand">
+    <span class="brand-hex">⬡</span>
+    <span class="brand-name">SENTINEL <em>6.0</em></span>
+  </div>
+  <div class="nav-center">
+    <span class="nc-pill active">Studio</span>
+    <span class="nc-pill">Docs</span>
+    <span class="nc-pill">About</span>
+  </div>
+  <div class="nav-tag">AI · MULTI-PLATFORM</div>
 </nav>
 
-<button class="nav-btn">⚡ Built for Hackathons</button>
-
-</header>
-
-
-
+<!-- HERO -->
 <section class="hero">
-
-<div class="hero-left">
-
-<div class="badge">AI-POWERED • SMART • AUTOMATED</div>
-
-<h1>
-Multi-Platform <br>
-Video <span>Adapter</span>
-</h1>
-
-<p>
-Upload once, optimize everywhere. Our intelligent AI agents automatically transform your content for Instagram, YouTube, and multiple social platforms with perfect formatting, smart cropping, enhanced quality, text overlays, and engagement-ready outputs.
-</p>
-
-<p>
-Designed for creators, marketers, and businesses who want faster publishing, professional visuals, and platform-specific optimization without spending hours editing manually.
-</p>
-
-<div class="mini-features">
-<span>⚡ Fast Processing</span>
-<span>🎯 Smart Cropping</span>
-<span>✍ Text Overlays</span>
-<span>🌈 Platform Ready</span>
-</div>
-
-</div>
-
-
-
-<div class="hero-right">
-
-<div class="preview-box">
-
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
-
-<div class="play-btn">▶</div>
-
-<div class="timebar">
-<span>00:00</span>
-<div class="line"></div>
-<span>00:15</span>
-</div>
-
-</div>
-
-</div>
-
+  <div class="hero-left">
+    <div class="hero-eyebrow">// AUTOMATED VIDEO ADAPTATION</div>
+    <h1 class="hero-title">One Upload.<br><span>Every Platform.</span></h1>
+    <p class="hero-desc">Drop your raw footage. Sentinel simultaneously crafts a YouTube Short + full subtitled video, an Instagram Reel with AI hook, and an X-optimised square clip with generated caption — in one shot.</p>
+    <div class="hero-chips">
+      <span>🎬 YouTube Shorts</span>
+      <span>📸 Instagram Reels</span>
+      <span>🐦 X / Twitter</span>
+      <span>🤖 Gemini AI</span>
+      <span>👁 Whisper STT</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="platform-cards">
+      <div class="pc yt">
+        <div class="pc-glyph">▶</div>
+        <div class="pc-info">
+          <strong>YouTube</strong>
+          <small>Short + Subtitled Full</small>
+        </div>
+        <div class="pc-dot"></div>
+      </div>
+      <div class="pc ig">
+        <div class="pc-glyph">◈</div>
+        <div class="pc-info">
+          <strong>Instagram</strong>
+          <small>9:16 Reel + Hook</small>
+        </div>
+        <div class="pc-dot"></div>
+      </div>
+      <div class="pc xp">
+        <div class="pc-glyph">✕</div>
+        <div class="pc-info">
+          <strong>X / Twitter</strong>
+          <small>Square clip + Caption</small>
+        </div>
+        <div class="pc-dot"></div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- UPLOAD -->
+<section class="section upload-section">
+  <div class="sec-label"><span class="sec-num">01</span> Upload Video</div>
 
+  <label class="dropzone" id="dropzone" for="videoInput">
+    <div class="dz-inner">
+      <div class="dz-arrow">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M20 5V28M20 5L12 13M20 5L28 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 31V34C6 35.1 6.9 36 8 36H32C33.1 36 34 35.1 34 34V31" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="dz-title">Drag &amp; drop your video here</p>
+      <p class="dz-sub">MP4 · MOV · AVI — up to 2 GB</p>
+      <span class="dz-btn">Browse File</span>
+    </div>
+    <input type="file" id="videoInput" accept="video/*" hidden>
+  </label>
 
-<section class="upload-panel">
+  <div class="file-info" id="fileInfo" style="display:none">
+    <span class="fi-icon">📹</span>
+    <span class="fi-name" id="fileName">—</span>
+    <span class="fi-size" id="fileSize">—</span>
+    <button class="fi-clear" id="clearBtn">✕ Remove</button>
+  </div>
 
-<div class="upload-icon">☁</div>
-
-<div class="upload-content">
-
-<h2>Upload Your Video</h2>
-<p>Drag & drop your video here or browse files</p>
-
-<div class="upload-row">
-
-<label class="choose-btn">
-📁 Choose File
-<input type="file" id="videoInput" hidden>
-</label>
-
-<span id="fileName">No file selected</span>
-
-</div>
-
-</div>
-
-<div class="or">OR</div>
-
-<div class="process-area">
-
-<small>Optimized for Reels (9:16)</small>
-
-</div>
-
+  <button class="run-btn" id="runBtn" disabled>
+    <span>Process All Platforms</span>
+    <span class="run-arrow">→</span>
+  </button>
 </section>
 
+<!-- PROGRESS -->
+<section class="section progress-section" id="progressSection" style="display:none">
+  <div class="sec-label"><span class="sec-num">02</span> Processing</div>
 
+  <div class="progress-lanes">
+    <div class="p-lane" id="planeYt">
+      <div class="pl-head">
+        <span class="pl-icon yt-c">▶</span>
+        <span class="pl-name">YouTube</span>
+        <span class="pl-msg" id="msgYt">Queued</span>
+      </div>
+      <div class="pl-track"><div class="pl-fill" id="fillYt"></div></div>
+    </div>
 
-<div id="status"></div>
-<div id="result"></div>
+    <div class="p-lane" id="planeIg">
+      <div class="pl-head">
+        <span class="pl-icon ig-c">◈</span>
+        <span class="pl-name">Instagram</span>
+        <span class="pl-msg" id="msgIg">Queued</span>
+      </div>
+      <div class="pl-track"><div class="pl-fill" id="fillIg"></div></div>
+    </div>
 
+    <div class="p-lane" id="planeX">
+      <div class="pl-head">
+        <span class="pl-icon x-c">✕</span>
+        <span class="pl-name">X / Twitter</span>
+        <span class="pl-msg" id="msgX">Queued</span>
+      </div>
+      <div class="pl-track"><div class="pl-fill" id="fillX"></div></div>
+    </div>
+  </div>
 
+  <p class="proc-log" id="procLog">Initialising agents…</p>
+</section>
 
+<!-- RESULTS -->
+<section class="section results-section" id="resultsSection" style="display:none">
+  <div class="sec-label"><span class="sec-num">03</span> Outputs</div>
+
+  <div class="results-grid">
+
+    <!-- YOUTUBE: 2 videos -->
+    <div class="r-col" id="colYt">
+      <div class="r-col-head">
+        <span class="rch-icon yt-c">▶</span>
+        <div>
+          <h3>YouTube</h3>
+          <p>Two outputs — Short clip &amp; Full subtitled video</p>
+        </div>
+      </div>
+
+      <!-- Short -->
+      <div class="vcard">
+        <div class="vc-meta">
+          <span class="vc-badge yt-badge">SHORT</span>
+          <span class="vc-desc">AI-selected best 20s segment · 9:16</span>
+        </div>
+        <video id="ytShorts" controls class="vplayer portrait"></video>
+        <a class="dl-btn" id="dlShorts" href="#" download>⬇ Download Short</a>
+      </div>
+
+      <!-- Subtitled full -->
+      <div class="vcard" style="margin-top:20px">
+        <div class="vc-meta">
+          <span class="vc-badge sub-badge">FULL + SUBTITLES</span>
+          <span class="vc-desc">Full video with burned-in Whisper subtitles</span>
+        </div>
+        <video id="ytFull" controls class="vplayer landscape"></video>
+        <a class="dl-btn" id="dlSubtitled" href="#" download>⬇ Download Subtitled</a>
+      </div>
+
+      <!-- Community post -->
+      <div class="text-card" id="communityCard">
+        <div class="tc-label">💬 Community Post (AI-generated)</div>
+        <p class="tc-body" id="communityText">—</p>
+        <button class="copy-btn" onclick="copyText('communityText',this)">Copy</button>
+      </div>
+    </div>
+
+    <!-- INSTAGRAM -->
+    <div class="r-col" id="colIg">
+      <div class="r-col-head">
+        <span class="rch-icon ig-c">◈</span>
+        <div>
+          <h3>Instagram</h3>
+          <p>Motion-detected reel with AI hook overlay</p>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vc-meta">
+          <span class="vc-badge ig-badge">REEL</span>
+          <span class="vc-desc">15-second 9:16 vertical clip</span>
+        </div>
+        <video id="igReel" controls class="vplayer portrait"></video>
+        <a class="dl-btn" id="dlReel" href="#" download>⬇ Download Reel</a>
+      </div>
+    </div>
+
+    <!-- X -->
+    <div class="r-col" id="colX">
+      <div class="r-col-head">
+        <span class="rch-icon x-c">✕</span>
+        <div>
+          <h3>X / Twitter</h3>
+          <p>Square clip with AI overlay + caption</p>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vc-meta">
+          <span class="vc-badge x-badge">CLIP</span>
+          <span class="vc-desc" id="xCategory">—</span>
+        </div>
+        <video id="xClip" controls class="vplayer square"></video>
+        <a class="dl-btn" id="dlX" href="#" download>⬇ Download Clip</a>
+      </div>
+      <div class="text-card">
+        <div class="tc-label">🐦 Generated Caption</div>
+        <p class="tc-body" id="xDesc">—</p>
+        <button class="copy-btn" onclick="copyText('xDesc',this)">Copy</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ERROR TOAST -->
+<div class="err-toast" id="errToast" style="display:none">
+  <span class="err-icon">⚠</span>
+  <pre class="err-msg" id="errMsg">Something went wrong.</pre>
+  <button class="err-close" onclick="this.parentElement.style.display='none'">✕</button>
+</div>
+
+<!-- FOOTER -->
 <footer>
-Made with ❤️ by Team Innovators
+  <span>SENTINEL 6.0</span>
+  <span class="fs">·</span>
+  <span>Team Innovators</span>
+  <span class="fs">·</span>
+  <span>Gemini + Whisper + FFmpeg</span>
 </footer>
 
-
-<script src="../static/script.js"></script>
-
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

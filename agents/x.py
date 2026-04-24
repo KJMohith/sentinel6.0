@@ -2,10 +2,11 @@ import os
 import subprocess
 import time
 import random
+import whisper
 from google import genai
 
 # ================= CONFIG =================
-API_KEY = "AIzaSyA4RqMmg8O0gjbMplVuaeJNr4BKJj8Szbc"
+API_KEY = "AIzaSyCnuTJ5A8V-u1tA5bbnxeoPqZ41g0LpQ1o"
 
 INPUT_VIDEO = "C:\\Users\\someo\\Desktop\\ksit\\sentinel6.0\\uploads\\test.mp4"
 OUTPUT_VIDEO = "C:\\Users\\someo\\Desktop\\ksit\\sentinel6.0\\outputs\\final_video.mp4"
@@ -77,6 +78,20 @@ def clip(video, start, dur, out):
     ]
     subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+# ================= TRANSCRIBE =================
+def transcribe_video(video):
+    """Extract speech from video using Whisper. Returns plain text or empty string."""
+    try:
+        print("🎙️ Transcribing video with Whisper...")
+        model = whisper.load_model("base")
+        result = model.transcribe(video)
+        text = result.get("text", "").strip()
+        print(f"📝 Transcript ({len(text)} chars): {text[:120]}{'...' if len(text) > 120 else ''}")
+        return text
+    except Exception as e:
+        print(f"⚠️ Transcription failed: {e}")
+        return ""
+
 # ================= SMART TRIM =================
 def smart_trim(video):
     d = get_duration(video)
@@ -105,39 +120,53 @@ def smart_trim(video):
     return MID
 
 # ================= CLASSIFY =================
-def classify():
-    result = ask_ai("""
-    Classify this video into ONE category:
+def classify(transcript=""):
+    transcript_section = f"\nVideo transcript:\n{transcript[:1000]}\n" if transcript.strip() else ""
 
+    result = ask_ai(f"""
+    Classify this video into ONE category based on its content.
+    {transcript_section}
+    Categories:
     funny
     emotional
     informative
     shocking
     satisfying
     motivational
+    neutral
+    casual
+    vlogging
 
-    Output ONLY the word.
+    Output ONLY the single category word.
     """)
 
     if result:
-        last_good["category"] = result.lower()
-        return result.lower()
+        last_good["category"] = result.lower().split()[0]
+        return last_good["category"]
 
     return last_good["category"] or "engaging"
 
 # ================= DESCRIPTION =================
-def generate_description(category):
+def generate_description(category, transcript=""):
+    transcript_section = (
+        f"\nHere is what was said or shown in the video:\n\"\"\"\n{transcript[:1500]}\n\"\"\"\n"
+        if transcript.strip()
+        else ""
+    )
+
     text = ask_ai(f"""
-    Write a 3–4 line paragraph for X (Twitter).
+    Write a 3–4 line post for X (Twitter) about this specific video.
+    {transcript_section}
+    Video category: {category}
 
     STRICT RULES:
-    - First person tone
-    - Include 1–2 emojis
-    - Sound natural and human
-    - Slight curiosity or emotion
+    - Write ONLY about what actually happens in this video
+    - First person tone, as if you filmed or experienced it
+    - Include 1–2 relevant emojis
+    - Sound natural and human, not like a bot
+    - Spark curiosity or emotion based on the real content
     - No hashtags
-
-    Category: {category}
+    - Do NOT make up content that isn't in the transcript
     """)
 
     if text:
@@ -151,23 +180,25 @@ def generate_description(category):
     )
 
 # ================= OVERLAY =================
-def generate_overlay(category):
+def generate_overlay(category, transcript=""):
+    transcript_hint = f"\nVideo is about: {transcript[:300]}" if transcript.strip() else ""
+
     text = ask_ai(f"""
-    Create a viral overlay text.
+    Create a viral overlay text for this video.
+    {transcript_hint}
+    Category: {category}
 
     STRICT:
     - Max 4 words
-    - MUST include emoji
-    - Very catchy and scroll-stopping
+    - MUST include one emoji
+    - Very catchy, scroll-stopping, relevant to the actual content
     - No explanation
-
-    Category: {category}
 
     Examples:
     funny → this got me 😂
     shocking → wait what 😳
 
-    Output ONLY the text.
+    Output ONLY the overlay text.
     """)
 
     if text:
@@ -216,6 +247,9 @@ def run():
 
     print("🚀 Running AI X Bot...\n")
 
+    print("🎙️ Transcribing video...")
+    transcript = transcribe_video(INPUT_VIDEO)
+
     print("✂️ Selecting best clip...")
     clip_path = smart_trim(INPUT_VIDEO)
 
@@ -223,14 +257,14 @@ def run():
     formatted = format_video(clip_path)
 
     print("🧠 Classifying content...")
-    category = classify()
+    category = classify(transcript)
     print("Category:", category)
 
     print("📝 Generating description...")
-    description = generate_description(category)
+    description = generate_description(category, transcript)
 
     print("🎯 Generating overlay...")
-    overlay = generate_overlay(category)
+    overlay = generate_overlay(category, transcript)
 
     print("🎬 Rendering final video...")
     render(formatted, overlay)
