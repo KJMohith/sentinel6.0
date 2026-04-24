@@ -1,141 +1,56 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Adaptation System</title>
-
-<link rel="stylesheet" href="../static/style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Adaptation System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
-
 <body>
+  <header class="navbar">
+    <div class="logo">🎬 Video Adaptation <span>System</span></div>
+  </header>
 
-<div class="bg-glow glow1"></div>
-<div class="bg-glow glow2"></div>
+  <section class="upload-panel">
+    <div class="upload-content">
+      <h2>Upload Your Video</h2>
+      <p>Process one video into Instagram, X, and YouTube outputs.</p>
+      <div class="upload-row">
+        <label class="choose-btn">
+          📁 Choose File
+          <input type="file" id="videoInput" accept="video/*" hidden />
+        </label>
+        <span id="fileName">No file selected</span>
+      </div>
+      <button id="processBtn" class="process-btn" type="button">Start Processing</button>
+    </div>
+  </section>
 
-<header class="navbar">
+  <div id="status" class="status"></div>
 
-<div class="logo">
-🎬 Video Adaptation <span>System</span>
-</div>
+  <section id="result" class="result-grid hidden">
+    <article class="slot-card" data-platform="instagram">
+      <h3>Instagram Output</h3>
+      <video controls preload="metadata"></video>
+      <a class="download-btn" download>⬇ Download Instagram Video</a>
+    </article>
 
-<nav>
-<a href="#">Home</a>
-<a href="#">Features</a>
-<a href="#">How It Works</a>
-<a href="#">About</a>
-</nav>
+    <article class="slot-card" data-platform="x">
+      <h3>X Output</h3>
+      <video controls preload="metadata"></video>
+      <a class="download-btn" download>⬇ Download X Video</a>
+    </article>
 
-<button class="nav-btn">⚡ Built for Hackathons</button>
+    <article class="slot-card" data-platform="youtube">
+      <h3>YouTube Output</h3>
+      <video controls preload="metadata"></video>
+      <a class="download-btn" download>⬇ Download YouTube Video</a>
+    </article>
+  </section>
 
-</header>
-
-
-
-<section class="hero">
-
-<div class="hero-left">
-
-<div class="badge">AI-POWERED • SMART • AUTOMATED</div>
-
-<h1>
-Multi-Platform <br>
-Video <span>Adapter</span>
-</h1>
-
-<p>
-Upload once, optimize everywhere. Our intelligent AI agents automatically transform your content for Instagram, YouTube, and multiple social platforms with perfect formatting, smart cropping, enhanced quality, text overlays, and engagement-ready outputs.
-</p>
-
-<p>
-Designed for creators, marketers, and businesses who want faster publishing, professional visuals, and platform-specific optimization without spending hours editing manually.
-</p>
-
-<div class="mini-features">
-<span>⚡ Fast Processing</span>
-<span>🎯 Smart Cropping</span>
-<span>✍ Text Overlays</span>
-<span>🌈 Platform Ready</span>
-</div>
-
-</div>
-
-
-
-<div class="hero-right">
-
-<div class="preview-box">
-
-<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
-
-<div class="play-btn">▶</div>
-
-<div class="timebar">
-<span>00:00</span>
-<div class="line"></div>
-<span>00:15</span>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<section class="upload-panel">
-
-<div class="upload-icon">☁</div>
-
-<div class="upload-content">
-
-<h2>Upload Your Video</h2>
-<p>Drag & drop your video here or browse files</p>
-
-<div class="upload-row">
-
-<label class="choose-btn">
-📁 Choose File
-<input type="file" id="videoInput" hidden>
-</label>
-
-<span id="fileName">No file selected</span>
-
-</div>
-
-</div>
-
-<div class="or">OR</div>
-
-<div class="process-area">
-
-<small>Optimized for Reels (9:16)</small>
-
-</div>
-
-</section>
-
-
-
-<div id="status"></div>
-<div id="result"></div>
-
-
-
-<footer>
-Made with ❤️ by Team Innovators
-</footer>
-
-
-<script src="../static/script.js"></script>
-
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
