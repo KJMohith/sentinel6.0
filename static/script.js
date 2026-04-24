@@ -1,132 +1,66 @@
-async function uploadVideo(){
-
-    const fileInput = document.getElementById("videoInput");
-    const status = document.getElementById("status");
-    const result = document.getElementById("result");
-
-    if(fileInput.files.length === 0){
-        alert("Please select a video.");
-        return;
-    }
-
-    const file = fileInput.files[0];
-
-    const formData = new FormData();// static/script.js
-
 const fileInput = document.getElementById("videoInput");
 const fileName = document.getElementById("fileName");
 const statusBox = document.getElementById("status");
-const resultBox = document.getElementById("result");
+const resultSection = document.getElementById("result");
+const processBtn = document.getElementById("processBtn");
 
-/* Show selected file name */
-
-fileInput.addEventListener("change", function () {
-
-    if (fileInput.files.length > 0) {
-        fileName.innerHTML = "📄 " + fileInput.files[0].name;
-    } else {
-        fileName.innerHTML = "No file selected";
-    }
-
+fileInput.addEventListener("change", () => {
+  fileName.textContent = fileInput.files.length ? `📄 ${fileInput.files[0].name}` : "No file selected";
 });
 
+processBtn.addEventListener("click", uploadVideo);
 
-/* Upload + Process Video */
+function assignSlot(platform, url) {
+  const slot = resultSection.querySelector(`[data-platform='${platform}']`);
+  if (!slot) return;
+
+  const video = slot.querySelector("video");
+  const downloadBtn = slot.querySelector(".download-btn");
+
+  video.src = url;
+  downloadBtn.href = url;
+}
+
+function isHiddenSegment(url) {
+  const lower = (url || "").toLowerCase();
+  return lower.includes("start.mp4") || lower.includes("mid.mp4") || lower.includes("middle.mp4") || lower.includes("end.mp4");
+}
 
 async function uploadVideo() {
+  if (!fileInput.files.length) {
+    statusBox.textContent = "⚠ Please choose a video first.";
+    return;
+  }
 
-    resultBox.innerHTML = "";
+  const formData = new FormData();
+  formData.append("video", fileInput.files[0]);
 
-    if (fileInput.files.length === 0) {
-        statusBox.innerHTML = "⚠ Please choose a video first.";
-        return;
+  statusBox.textContent = "⏳ Uploading and processing video...";
+  resultSection.classList.add("hidden");
+
+  try {
+    const response = await fetch("/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Processing failed.");
     }
 
-    const file = fileInput.files[0];
-
-    const formData = new FormData();
-    formData.append("video", file);
-
-    statusBox.innerHTML = "⏳ Uploading video...";
-    
-    try {
-
-        /* Fake Progress Feel */
-        setTimeout(() => {
-            statusBox.innerHTML = "⚙ Optimizing for Instagram Reels...";
-        }, 1200);
-
-        setTimeout(() => {
-            statusBox.innerHTML = "🎬 Rendering final output...";
-        }, 2500);
-
-
-        const response = await fetch("/upload", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.json();
-
-
-        if (data.success) {
-
-            statusBox.innerHTML = "✅ Video processed successfully!";
-
-            resultBox.innerHTML = `
-                <a href="${data.output}" download>
-                    🚀 Download Processed Reel
-                </a>
-            `;
-
-        } else {
-
-            statusBox.innerHTML = "❌ Processing failed.";
-
-        }
-
-    } catch (error) {
-
-        /* If backend not ready, demo mode success */
-
-        setTimeout(() => {
-
-            statusBox.innerHTML = "✅ Demo Preview Ready (Backend Pending)";
-
-            resultBox.innerHTML = `
-                <a href="#">
-                    🚀 Download Sample Output
-                </a>
-            `;
-
-        }, 3000);
-
+    const outputs = data.outputs || {};
+    if (Object.values(outputs).some(isHiddenSegment)) {
+      throw new Error("Internal segment output detected. Only final videos are allowed.");
     }
 
-}
-    formData.append("video", file);
+    assignSlot("instagram", outputs.instagram);
+    assignSlot("x", outputs.x);
+    assignSlot("youtube", outputs.youtube);
 
-    status.innerHTML = "⏳ Processing video...";
-    result.innerHTML = "";
-
-    try{
-
-        const response = await fetch("/upload", {
-            method:"POST",
-            body:formData
-        });
-
-        const data = await response.json();
-
-        if(data.success){
-            status.innerHTML = "✅ Processing Complete!";
-            result.innerHTML =
-            `<a href="${data.output}" download>⬇ Download Reel</a>`;
-        }else{
-            status.innerHTML = "❌ Failed.";
-        }
-
-    }catch(error){
-        status.innerHTML = "⚠ Server Error.";
-    }
+    statusBox.textContent = "✅ Done! Download your platform outputs below.";
+    resultSection.classList.remove("hidden");
+  } catch (error) {
+    statusBox.textContent = `❌ ${error.message}`;
+  }
 }
