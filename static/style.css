@@ -93,6 +93,25 @@ body {
   background: #000;
 }
 
+.youtube-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.youtube-output {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.youtube-output h4 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+}
+
 .download-btn {
   text-decoration: none;
   color: #e2e8f0;

@@ -44,10 +44,20 @@
       <a class="download-btn" download>⬇ Download X Video</a>
     </article>
 
-    <article class="slot-card" data-platform="youtube">
-      <h3>YouTube Output</h3>
-      <video controls preload="metadata"></video>
-      <a class="download-btn" download>⬇ Download YouTube Video</a>
+    <article class="slot-card youtube-card" data-platform="youtube">
+      <h3>YouTube Outputs</h3>
+
+      <div class="youtube-output" data-youtube-type="short">
+        <h4>Short Video</h4>
+        <video controls preload="metadata"></video>
+        <a class="download-btn" download>⬇ Download YouTube Short</a>
+      </div>
+
+      <div class="youtube-output" data-youtube-type="long">
+        <h4>Long Video with Subtitles</h4>
+        <video controls preload="metadata"></video>
+        <a class="download-btn" download>⬇ Download YouTube Long (Subtitled)</a>
+      </div>
     </article>
   </section>
 
