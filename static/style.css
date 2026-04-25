@@ -393,6 +393,7 @@ body {
 .sub-badge { background:rgba(124,58,237,.15);  color:#a78bfa;  border:1px solid rgba(124,58,237,.3); }
 .ig-badge  { background:rgba(225,48,108,.15);  color:var(--ig); border:1px solid rgba(225,48,108,.3); }
 .x-badge   { background:rgba(29,155,240,.15);  color:var(--xp); border:1px solid rgba(29,155,240,.3); }
+.hindi-badge { background:rgba(255,153,0,.15); color:#ff9900; border:1px solid rgba(255,153,0,.3); }
 
 .vc-desc { font-size:12px; color:var(--muted); }
 

@@ -43,6 +43,7 @@
       <span>🐦 X / Twitter</span>
       <span>🤖 Gemini AI</span>
       <span>👁 Whisper STT</span>
+      <span>🇮🇳 Hindi Dub</span>
     </div>
   </div>
   <div class="hero-right">
@@ -51,7 +52,7 @@
         <div class="pc-glyph">▶</div>
         <div class="pc-info">
           <strong>YouTube</strong>
-          <small>Short + Subtitled Full</small>
+          <small>Short + Subtitled + Hindi Dub</small>
         </div>
         <div class="pc-dot"></div>
       </div>
@@ -149,13 +150,13 @@
 
   <div class="results-grid">
 
-    <!-- YOUTUBE: 2 videos -->
+    <!-- YOUTUBE: 3 videos -->
     <div class="r-col" id="colYt">
       <div class="r-col-head">
         <span class="rch-icon yt-c">▶</span>
         <div>
           <h3>YouTube</h3>
-          <p>Two outputs — Short clip &amp; Full subtitled video</p>
+          <p>Short · Subtitled Full · Hindi Dubbed</p>
         </div>
       </div>
 
@@ -163,7 +164,7 @@
       <div class="vcard">
         <div class="vc-meta">
           <span class="vc-badge yt-badge">SHORT</span>
-          <span class="vc-desc">AI-selected best 20s segment · 9:16</span>
+          <span class="vc-desc">AI-selected best segment · 9:16</span>
         </div>
         <video id="ytShorts" controls class="vplayer portrait"></video>
         <a class="dl-btn" id="dlShorts" href="#" download>⬇ Download Short</a>
@@ -177,6 +178,16 @@
         </div>
         <video id="ytFull" controls class="vplayer landscape"></video>
         <a class="dl-btn" id="dlSubtitled" href="#" download>⬇ Download Subtitled</a>
+      </div>
+
+      <!-- Hindi dubbed -->
+      <div class="vcard" style="margin-top:20px">
+        <div class="vc-meta">
+          <span class="vc-badge hindi-badge">🇮🇳 HINDI DUBBED</span>
+          <span class="vc-desc">AI-translated · Male Hindi Neural Voice</span>
+        </div>
+        <video id="ytHindi" controls class="vplayer landscape"></video>
+        <a class="dl-btn" id="dlHindi" href="#" download>⬇ Download Hindi Dub</a>
       </div>
 
       <!-- Community post -->

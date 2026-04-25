@@ -177,7 +177,7 @@ function displayResults(results) {
   resultsSection.style.display = 'block';
   resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-  /* ── YouTube: two videos ──────────────────────────── */
+  /* ── YouTube: three videos ────────────────────────── */
   const yt = results.youtube;
   if (yt) {
     if (yt.shorts_exists && yt.shorts_url) {
@@ -188,6 +188,10 @@ function displayResults(results) {
     if (yt.subtitled_exists && yt.subtitled_url) {
       loadVideo('ytFull', yt.subtitled_url);
       setDownload('dlSubtitled', yt.subtitled_url, 'youtube_subtitled.mp4');
+    }
+    if (yt.hindi_dubbed_exists && yt.hindi_dubbed_url) {
+      loadVideo('ytHindi', yt.hindi_dubbed_url);
+      setDownload('dlHindi', yt.hindi_dubbed_url, 'youtube_hindi_dubbed.mp4');
     }
     if (yt.community_post) {
       document.getElementById('communityText').textContent = yt.community_post;

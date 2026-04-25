@@ -6,7 +6,7 @@ import whisper
 from google import genai
 
 # ================= CONFIG =================
-API_KEY = "AIzaSyCnuTJ5A8V-u1tA5bbnxeoPqZ41g0LpQ1o"
+API_KEY = "AIzaSyBtDmZ3UYBUZQwOlYjgdHXPNGQJvD4wT9o"
 
 INPUT_VIDEO = "C:\\Users\\someo\\Desktop\\ksit\\sentinel6.0\\uploads\\test.mp4"
 OUTPUT_VIDEO = "C:\\Users\\someo\\Desktop\\ksit\\sentinel6.0\\outputs\\final_video.mp4"

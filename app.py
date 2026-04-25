@@ -133,18 +133,21 @@ def run_youtube_agent(video_path, event_queue):
 
     event_queue.put({"agent": "youtube", "status": "running", "msg": "🎬 Splitting video into segments…"})
     result = process_youtube(video_path)
-    # result keys: shorts, full, subtitled, community_post
+    # result keys: shorts, full, subtitled, community_post, hindi_dubbed
 
-    shorts_path   = result["shorts"]
-    subtitled_path = result["subtitled"]
-    community      = result["community_post"]
+    shorts_path       = result["shorts"]
+    subtitled_path    = result["subtitled"]
+    hindi_dubbed_path = result["hindi_dubbed"]
+    community         = result["community_post"]
 
     return {
-        "shorts_url":    "/outputs_youtube/" + os.path.basename(shorts_path),
-        "subtitled_url": "/outputs_youtube/" + os.path.basename(subtitled_path),
-        "shorts_exists":    os.path.exists(shorts_path),
-        "subtitled_exists": os.path.exists(subtitled_path),
-        "community_post": community,
+        "shorts_url":         "/outputs_youtube/" + os.path.basename(shorts_path),
+        "subtitled_url":      "/outputs_youtube/" + os.path.basename(subtitled_path),
+        "hindi_dubbed_url":   "/outputs_youtube/" + os.path.basename(hindi_dubbed_path),
+        "shorts_exists":         os.path.exists(shorts_path),
+        "subtitled_exists":      os.path.exists(subtitled_path),
+        "hindi_dubbed_exists":   os.path.exists(hindi_dubbed_path),
+        "community_post":     community,
     }
 
 
